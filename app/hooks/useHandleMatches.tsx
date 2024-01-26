@@ -9,7 +9,6 @@ export const useHandleMatches = () => {
     const [currentMatches, setCurrentMatches] = useState<Array<TTeamStatus>>([]);
     const [matchesHistory, setMatchesHistory] = useState<Array<Array<TTeamStatus>>>([]);
 
-
     const onUpdateCurrentMatches = (values: TTeamStatus) => setCurrentMatches([...currentMatches, values]);
 
     const onFetchFormData = async() => {
@@ -45,30 +44,6 @@ export const useHandleMatches = () => {
             setCurrentMatches([]);
         }
     },[currentMatches])
-
-    // useEffect(() => {
-    //     if(currentMatches.length == 2){
-            
-    //         const data = {
-    //             "round_one": [
-    //                 {id: 1, name: currentMatches[0].winner.name},
-    //                 {id: 2, name: currentMatches[1].winner.name}
-    //             ],
-
-    //             "round_two": [
-    //                 {id: 1, name: currentMatches[0].looser.name},
-    //                 {id: 2, name: currentMatches[1].looser.name}
-    //             ]
-    //         }
-
-    //         setMatchesHistory([...matchesHistory, currentMatches]);
-    //         setMatches([...matches, data]);
-    //         setCurrentMatches([]);
-    //     }
-
-    // },[currentMatches])
-
-
 
 
     return {formMatches,  matches, onUpdateCurrentMatches};
