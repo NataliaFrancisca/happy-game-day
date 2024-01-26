@@ -10,7 +10,7 @@
 }
 
 body {
-  height: 100vh;
+  height: auto;
   background: rgb(131,58,180);
   background: linear-gradient(0deg, rgba(131,58,180,.8) 30%, rgba(253,29,29,.8) 67%, rgba(252,176,69,.8) 100%);
 }
