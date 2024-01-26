@@ -36,9 +36,9 @@ const Match = (props: {data: Array<TMatch>, updateState: any, shouldUpdateValues
     }      
 
     return(
-        <section className='grid grid-cols-3 p-5 items-center w-full bg-red justify-items-center'>
+        <section className={`grid grid-cols-3 p-5 items-center w-full bg-white justify-items-center`}>
             <button 
-                className="p-2.5 text-base font-bold cursor-pointer bg-white w-full rounded"
+                className="p-2.5 text-base font-bold cursor-pointer bg-slate-300 w-full rounded"
                 onClick={(event) => onCheckWinner(event)} 
                 value={team1.id} 
                 ref={ref_button_team_one}>
@@ -46,7 +46,7 @@ const Match = (props: {data: Array<TMatch>, updateState: any, shouldUpdateValues
             </button>
             <span className='font-bold font-montserratalternates'>vs</span>
             <button 
-                className="p-2.5 text-base font-bold cursor-pointer bg-white w-full rounded"
+                className="p-2.5 text-base font-bold cursor-pointer bg-slate-300 w-full rounded"
                 onClick={(event) => onCheckWinner(event)} 
                 value={team2.id} 
                 ref={ref_button_team_two}>
