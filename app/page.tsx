@@ -6,11 +6,10 @@ export default function Home() {
   const onNavigation = () => router.push("/form");
 
   return (
-    <main className="flex items-center justify-center flex-col min-h-screen w-full p-10">
-      <h1 className="text-4xl font-montserratalternates font-bold text-black-12 text-wrap text-center">HAPPY <br/>GAME DAY</h1>
-
+    <main className="flex items-start justify-end flex-col min-h-screen w-full p-11 md:w-3/6">
+      <h1 className="text-5xl font-fasterone text-black-12 text-wrap text-start">HAPPY <br/>GAME <br/> DAY</h1>
       <button onClick={() => onNavigation()}
-        className="m-5 bg-slate-50 p-4 w-full font-bold font-inter rounded-sm hover:bg-slate-300">
+        className="bg-slate-50 mt-6 p-4 w-full font-bold font-familjen rounded-md hover:bg-slate-300">
           START
       </button>
     </main>
