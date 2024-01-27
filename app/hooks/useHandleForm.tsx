@@ -1,8 +1,8 @@
 import { FormEvent } from "react"
 import { useRouter } from "next/navigation";
-import { setForm } from "../storage/cookies";
+import { setAppOption, setForm } from "../storage/cookies";
 
-export const useHandleForm = (inputValues: Array<string>) => {
+export const useHandleForm = (inputValues: Array<string>, appOptionChoosed: string) => {
     const router = useRouter();
 
     const onSubmitForm = (event: FormEvent) => {
@@ -20,6 +20,7 @@ export const useHandleForm = (inputValues: Array<string>) => {
         }
 
         setForm([startMatches]);
+        setAppOption(appOptionChoosed);
         router.push("/view-matches");
     }
 
