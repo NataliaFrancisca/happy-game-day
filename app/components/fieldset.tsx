@@ -6,10 +6,10 @@ interface IFieldset{
 }
 const Fieldset = (props: IFieldset) => {
     return(
-        <fieldset className="flex items-center justify-between w-full my-4">
-            <label className="font-bold" htmlFor='input-team'>{props.labelMessage}:</label>
+        <fieldset className="flex justify-between font-familjen items-center w-full my-4">
+            <label className="font-bold w-fit text-lg" htmlFor='input-team'>{props.labelMessage}:</label>
             <input 
-                className="bg-transparent border-solid border-2 border-black rounded-sm p-1"
+                className="bg-[#1E1E1E;] w-9/12 border-solid border-1 p-1 text-white"
                 type='text' 
                 id='input-team' 
                 required 
