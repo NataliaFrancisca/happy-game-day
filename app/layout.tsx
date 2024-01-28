@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Montserrat_Alternates } from "next/font/google";
+import { Familjen_Grotesk, Faster_One } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const familjen_grotesk = Familjen_Grotesk({
+    weight: ['400', '500', '600', '700'],
    subsets: ["latin"],
-   variable: '--font-inter'
+   variable: '--font-familjen-rotesk'
 });
 
-const montserrat_alternates = Montserrat_Alternates({
+const faster_one = Faster_One({
+  weight: ['400'],
   subsets: ['latin'],
-  weight: ['200', '400', '500', '600', '800'],
-  variable: '--font-montserrat-alternates',
+  variable: '--font-faster-one',
 });
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${montserrat_alternates.variable}`}>{children}</body>
+      <body className={`${familjen_grotesk.variable} ${faster_one.variable}`}>{children}</body>
     </html>
   );
 }
