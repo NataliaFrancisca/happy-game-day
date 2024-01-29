@@ -29,7 +29,7 @@ export default function PageForm (){
                 <fieldset className="mb-2">
                     <input 
                         id="option-value-one" 
-                        value="OP-ONE" 
+                        value="OP-WINNER-LOOSER" 
                         type="radio" 
                         name="app-option" 
                         className="mr-2"
@@ -46,7 +46,7 @@ export default function PageForm (){
                 <fieldset className="mb-2">
                     <input 
                         id="option-value-two" 
-                        value="OP-TWO" 
+                        value="OP-CROSSED-MATCHES" 
                         type="radio" 
                         name="app-option" 
                         className="mr-2"
