@@ -14,9 +14,14 @@ export function getFormData(){
 }
 
 export function setAppOption(appOption: string){
-    localStorage.setItem('USER_APP_OPTION', appOption);
+    const data = JSON.stringify(appOption);
+    localStorage.setItem('USER_APP_OPTION', data);
 }
 
 export function getAppOption(){
-    return localStorage.getItem("USER_APP_OPTION");
+    const data = localStorage.getItem('USER_APP_OPTION');
+
+    if(data){
+        return JSON.parse(data);
+    }
 }
