@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { TDataTeams, TTeamStatus } from "../types/types";
-import { getAppOption, getFormData } from "../storage/cookies";
+import { getAppOption, getFormData } from "../storage/localStorage";
 
 export const useHandleMatches = () => {
     const formMatches = getFormData();
