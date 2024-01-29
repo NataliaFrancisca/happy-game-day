@@ -1,52 +1,54 @@
 import { useEffect, useState } from "react"
 import { TDataTeams, TTeamStatus } from "../types/types";
-import { getForm } from "../storage/cookies";
+import { getAppOption, getFormData } from "../storage/cookies";
 
 export const useHandleMatches = () => {
-    const [formMatches, setFormMatches] = useState<Array<TDataTeams> | undefined>(undefined);
+    const formMatches = getFormData();
+    const appOption = getAppOption();
 
-    const [matches, setMatches] = useState<Array<TDataTeams>>([]);
+    const [matches, setMatches] = useState<Array<TDataTeams>>(formMatches);
     const [currentMatches, setCurrentMatches] = useState<Array<TTeamStatus>>([]);
-    const [matchesHistory, setMatchesHistory] = useState<Array<Array<TTeamStatus>>>([]);
 
     const onUpdateCurrentMatches = (values: TTeamStatus) => setCurrentMatches([...currentMatches, values]);
-
-    const onFetchFormData = async() => {
-        const response = await getForm();
-        
-        if(response){
-            setFormMatches(response);
-            setMatches(response);
-        }
-    }
-   
-    useEffect(() => {
-        if(formMatches === undefined){
-            onFetchFormData();
-        }
-    },[formMatches]);
 
     useEffect(() => {
         if(currentMatches.length == 2){
 
-            const groupMatchesNumberOne = {
-                "round_one": [{id: 1, name: currentMatches[0].winner.name}, {id: 2, name: currentMatches[1].winner.name}],
-                "round_two": [{id: 1, name: currentMatches[0].looser.name}, {id:2, name: currentMatches[1].looser.name}]
+            if(appOption == 'OP-WINNER-LOOSER'){
+                const matchesGenerated = createWinnerAndLooserMatches(currentMatches);
+                setMatches([...matches, matchesGenerated]);
+                setCurrentMatches([]);
+            }else{
+                const {winnerAndLooserMatches, crossedMatches } = createCrossedMatches(currentMatches);
+                setMatches([...matches, winnerAndLooserMatches, crossedMatches]);
+                setCurrentMatches([]);
             }
-
-            const groupMatchesNumberTwo = {
-                "round_one": [{id: 1, name: groupMatchesNumberOne.round_one[0].name}, {id: 2, name: groupMatchesNumberOne.round_two[1].name}],
-                "round_two": [{id: 1, name: groupMatchesNumberOne.round_one[1].name}, {id: 2, name: groupMatchesNumberOne.round_two[0].name}]
-            }
-
-            setMatchesHistory([...matchesHistory, currentMatches]);
-            setMatches([...matches, groupMatchesNumberOne, groupMatchesNumberTwo]);
-            setCurrentMatches([]);
         }
-    },[currentMatches])
+    },[currentMatches, matches, appOption])
 
-
-    return {formMatches,  matches, onUpdateCurrentMatches};
+    return {formMatches, matches, appOption, onUpdateCurrentMatches};
 }
 
+function createWinnerAndLooserMatches(matchesGroup: Array<TTeamStatus>){
+    const [ matchNumberOne, matchNumberTwo ] = matchesGroup;
 
+    const winnerAndLooserMatches = {
+        "roundOne": [{id: 1, name: matchNumberOne.winner.name}, {id:2, name: matchNumberTwo.winner.name}],
+        "roundTwo": [{id: 1, name: matchNumberOne.looser.name}, {id:2, name: matchNumberTwo.looser.name}]
+    };
+
+    return winnerAndLooserMatches;
+}
+
+function createCrossedMatches(matchesGroup: Array<TTeamStatus>){
+    const [ matchNumberOne, matchNumberTwo ] = matchesGroup;
+
+    const winnerAndLooserMatches = createWinnerAndLooserMatches(matchesGroup);
+
+    const crossedMatches = {
+        "roundOne": [{id:1, name: matchNumberOne.winner.name}, {id: 2, name: matchNumberTwo.looser.name}],
+        "roundTwo": [{id:1, name: matchNumberTwo.winner.name}, {id: 2, name: matchNumberOne.looser.name}]
+    };
+
+    return { winnerAndLooserMatches, crossedMatches }
+}
