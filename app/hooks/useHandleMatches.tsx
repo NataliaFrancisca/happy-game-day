@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react"
 import { TDataTeams, TTeamStatus } from "../types/types";
-import { getAppOption, getFormData } from "../storage/localStorage";
+import { useLocalStorage } from "./useLocalStorage";
 
 export const useHandleMatches = () => {
-    const formMatches = getFormData();
-    const appOption = getAppOption();
+    const { appOption, formMatches } = useLocalStorage();
 
-    const [matches, setMatches] = useState<Array<TDataTeams>>(formMatches);
+    const [matches, setMatches] = useState<Array<TDataTeams>>([]);
     const [currentMatches, setCurrentMatches] = useState<Array<TTeamStatus>>([]);
 
     const onUpdateCurrentMatches = (values: TTeamStatus) => setCurrentMatches([...currentMatches, values]);
+
+    useEffect(() => {
+        setMatches(formMatches);
+    },[formMatches])
 
     useEffect(() => {
         if(currentMatches.length == 2){
@@ -26,7 +29,7 @@ export const useHandleMatches = () => {
         }
     },[currentMatches, matches, appOption])
 
-    return {formMatches, matches, appOption, onUpdateCurrentMatches};
+    return {matches, appOption, onUpdateCurrentMatches};
 }
 
 function createWinnerAndLooserMatches(matchesGroup: Array<TTeamStatus>){
