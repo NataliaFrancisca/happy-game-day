@@ -1,6 +1,6 @@
 import { FormEvent } from "react"
 import { useRouter } from "next/navigation";
-import { setAppOption, setForm } from "../storage/cookies";
+import { setAppOption, setFormData } from "../storage/cookies";
 
 export const useHandleForm = (inputValues: Array<string>, appOptionChoosed: string) => {
     const router = useRouter();
@@ -15,11 +15,11 @@ export const useHandleForm = (inputValues: Array<string>, appOptionChoosed: stri
         }
 
         const startMatches = {
-            "round_one": [{id: 1, name: first}, {id:2, name: second}],
-            "round_two": [{id: 1, name: third}, {id:2, name: fourth}]
+            "roundOne": [{id: 1, name: first}, {id:2, name: second}],
+            "roundTwo": [{id: 1, name: third}, {id:2, name: fourth}]
         }
 
-        setForm([startMatches]);
+        setFormData([startMatches]);
         setAppOption(appOptionChoosed);
         router.push("/view-matches");
     }
