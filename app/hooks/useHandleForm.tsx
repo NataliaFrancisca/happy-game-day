@@ -1,6 +1,6 @@
 import { FormEvent } from "react"
 import { useRouter } from "next/navigation";
-import { setAppOption, setFormData } from "../storage/cookies";
+import { setAppOption, setFormData } from "../storage/localStorage";
 
 export const useHandleForm = (inputValues: Array<string>, appOptionChoosed: string) => {
     const router = useRouter();
