@@ -1,6 +1,6 @@
 export type TDataTeams = {
-    "round_one": Array<TTeam>,
-    "round_two": Array<TTeam>
+    "roundOne": Array<TTeam>,
+    "roundTwo": Array<TTeam>
 }
 
 
