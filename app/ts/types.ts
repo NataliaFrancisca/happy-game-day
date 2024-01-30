@@ -1,8 +1,7 @@
 export type TDataTeams = {
-    "roundOne": Array<TTeam>,
-    "roundTwo": Array<TTeam>
+    roundOne: Array<TTeam>,
+    roundTwo: Array<TTeam>
 }
-
 
 export type TTeam = {
     id: number;
@@ -10,14 +9,14 @@ export type TTeam = {
 }
 
 export type TState = {
-    'form': {
+    form: {
         'value': TDataTeams
     }
 }
 
 export type TTeamStatus = {
-    'winner': TTeam,
-    'looser': TTeam
+    winner: TTeam,
+    looser: TTeam
 }
 
 export type TMatch = {
