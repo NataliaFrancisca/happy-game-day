@@ -1,57 +1,53 @@
 'use client';
-import { useRef } from 'react';
-import { TMatch } from '@/app/types/types';
+import { useRef} from 'react';
+import { TMatch } from '@/app/ts/types';
+import Button from './button';
 
 const Match = (props: {data: Array<TMatch>, updateState: any, shouldUpdateValues: boolean}) => {
-    const ref_button_team_one = useRef<HTMLButtonElement | null>(null);
-    const ref_button_team_two = useRef<HTMLButtonElement | null>(null);
+    const [teamOne, teamTwo] = props.data;
 
-    const [team1, team2] = props.data;
+    const refGroupButtons = useRef<HTMLElement>(null);
 
-    const onCheckWinner = (value: any) => {
-        const winner_id = parseInt(value.target.value);
+    const onCheckWinner = (event: React.MouseEvent<HTMLButtonElement>) => {
+        const winner_id = parseInt(event.currentTarget.value);
 
-        const winner = props.data.find((team) => team.id === winner_id);
-        const looser = props.data.find((team) => team.id !== winner_id);
+        const winnerTeam = props.data.find((team) => team.id === winner_id);
+        const looserTeam = props.data.find((team) => team.id !== winner_id);
 
-        const status = {
-            winner,
-            looser
-        }
+        const status = {winner: winnerTeam, looser: looserTeam}
 
-        if(ref_button_team_one.current && ref_button_team_two.current){
-            ref_button_team_one.current.setAttribute('disabled', 'true');
-            ref_button_team_two.current.setAttribute('disabled', 'true');
 
-            ref_button_team_one.current.classList.add("disabled");
-            ref_button_team_two.current.classList.add("disabled");
-
-            value.target.classList.add("winner");
-        }
+        onSetButtonAttribute(event);
 
         if(props.shouldUpdateValues){
             props.updateState(status);
         }
- 
     }      
 
+    const onSetButtonAttribute = (event: React.MouseEvent<HTMLButtonElement>) => {
+        const buttonsFromEachMatch = refGroupButtons.current?.querySelectorAll('button');
+
+        if(buttonsFromEachMatch){
+            const teamOne = buttonsFromEachMatch[0];
+            const teamTwo = buttonsFromEachMatch[1];
+
+            teamOne.setAttribute('disabled', 'true');
+            teamTwo.setAttribute('disabled', 'true');
+
+            teamOne.classList.add('disabled');
+            teamTwo.classList.add('disabled');
+
+            event.currentTarget.classList.add('winner');
+        }
+    }
+
     return(
-        <section className={`grid grid-cols-3 p-5 items-center w-full bg-white justify-items-center`}>
-            <button 
-                className="p-2.5 text-base font-bold cursor-pointer bg-slate-300 w-full rounded"
-                onClick={(event) => onCheckWinner(event)} 
-                value={team1.id} 
-                ref={ref_button_team_one}>
-                    {team1.name}
-            </button>
-            <span className='font-bold font-montserratalternates'>vs</span>
-            <button 
-                className="p-2.5 text-base font-bold cursor-pointer bg-slate-300 w-full rounded"
-                onClick={(event) => onCheckWinner(event)} 
-                value={team2.id} 
-                ref={ref_button_team_two}>
-                    {team2.name}
-            </button>
+        <section className="flex justify-between p-5 items-center w-full bg-white justify-items-center" ref={refGroupButtons}>
+            <Button data={teamOne} onHandleButton={onCheckWinner} />
+   
+            <span className='font-medium font-fasterone px-4'>vs</span>
+
+            <Button data={teamTwo} onHandleButton={onCheckWinner} />
         </section>
     )
 }

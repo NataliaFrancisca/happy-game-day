@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { TDataTeams, TTeamStatus } from "../types/types";
+import { TDataTeams, TTeamStatus } from "../ts/types";
 import { useLocalStorage } from "./useLocalStorage";
 
 export const useHandleMatches = () => {

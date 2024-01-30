@@ -1,4 +1,4 @@
-import { TDataTeams } from "../types/types";
+import { TDataTeams } from "../ts/types";
 
 export function setFormData(teams: Array<TDataTeams>){
     const data = JSON.stringify(teams);
