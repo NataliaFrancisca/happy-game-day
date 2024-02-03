@@ -1,3 +1,5 @@
+import { IMatch } from "./interface";
+
 export type TDataTeams = {
     roundOne: Array<TTeam>,
     roundTwo: Array<TTeam>
@@ -19,7 +21,6 @@ export type TTeamStatus = {
     looser: TTeam
 }
 
-export type TMatch = {
-    id: number,
-    name: string
+export type IUseHandleMatch = IMatch & {
+    refGroupButtons: any
 }

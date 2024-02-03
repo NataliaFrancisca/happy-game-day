@@ -1,9 +1,5 @@
-import { Dispatch } from "react";
+import { IFieldset } from "../ts/interface";
 
-interface IFieldset{
-    labelMessage: string,
-    onChangeInput: Dispatch<string>
-}
 const Fieldset = (props: IFieldset) => {
     return(
         <fieldset className="flex justify-between font-familjen items-center w-full my-4">
